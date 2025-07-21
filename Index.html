@@ -42,6 +42,27 @@
       text-decoration: none;
       border-radius: 8px;
     }
+    .gallery {
+      padding: 2em;
+      background: #f8f8f8;
+    }
+    .gallery h2 {
+      margin-bottom: 1em;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1em;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
     footer {
       font-size: 0.8em;
       margin: 3em 0 1em;
@@ -56,13 +77,23 @@
   </header>
 
   <div class="product">
-    <img src="Carte_rue.jpeg" alt="Carte postale" width="300">
+    <img src="images/carte_rue.heic" alt="Carte postale rue de San Pedro" width="300">
     <div class="product-description">
       <h2>Carte postale – Rue de San Pedro</h2>
       <p>Impression 5x7" sur papier photo</p>
       <a href="https://buy.stripe.com/test_test_test" class="buy-button">Acheter – 6$</a>
     </div>
   </div>
+
+  <section class="gallery">
+    <h2>Galerie d'aquarelles</h2>
+    <div class="gallery-grid">
+      <img src="images/carte_elementsDeVie.heic" alt="Aquarelle San Pedro">
+      <img src="images/carte_lac.heic" alt="Aquarelle Lac Atitlán">
+      <img src="images/carte_ramen.heic" alt="Aquarelle marché Chichicastenango">
+      <!-- Ajoute d'autres images ici -->
+    </div>
+  </section>
 
   <footer>
     © 2025 Les Aquarelles de Flo
