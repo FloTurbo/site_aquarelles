@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Aquarelles de Flo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fffefc;
+      color: #2d2d2d;
+      margin: 0; padding: 0;
+      text-align: center;
+    }
+    header {
+      padding: 1em;
+      background-color: #d3e4e0;
+    }
+    h1 {
+      margin: 0.2em 0;
+    }
+    .product {
+      margin: 2em auto;
+      max-width: 500px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+    }
+    .product img {
+      width: 100%;
+    }
+    .product-description {
+      padding: 1em;
+    }
+    .buy-button {
+      display: inline-block;
+      background: #337ab7;
+      color: white;
+      padding: 0.6em 1.2em;
+      margin-top: 1em;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    footer {
+      font-size: 0.8em;
+      margin: 3em 0 1em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Les Aquarelles de Flo</h1>
+    <p>Cartes postales et créations à vélo</p>
+  </header>
+
+  <div class="product">
+    <img src="https://via.placeholder.com/600x400?text=Aquarelle+Volcan" alt="Aquarelle Volcan">
+    <div class="product-description">
+      <h2>Carte postale – Volcan</h2>
+      <p>Impression 5x7" sur papier recyclé</p>
+      <a href="https://buy.stripe.com/test_test_test" class="buy-button">Acheter – 6$</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Les Aquarelles de Flo
+  </footer>
+</body>
+</html>
