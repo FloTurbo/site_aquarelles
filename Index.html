@@ -6,93 +6,87 @@
   <title>Les Aquarelles de Flo</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       background: #fffefc;
-      color: #2d2d2d;
+      color: #333;
       margin: 0;
       padding: 0;
       text-align: center;
     }
 
     header {
-      padding: 1em;
-      background-color: #d3e4e0;
+      padding: 2em 1em;
+      background-color: #e9f3f1;
+      border-bottom: 2px solid #c4dedb;
+    }
+
+    header img {
+      width: 120px;
+      height: auto;
+      margin-bottom: 0.5em;
     }
 
     h1 {
       margin: 0.2em 0;
+      font-size: 2em;
+      color: #2a4d45;
     }
 
-    .product {
-      margin: 2em auto;
-      max-width: 500px;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .product img {
-      width: 100%;
-    }
-
-    .product-description {
-      padding: 1em;
-    }
-
-    .buy-button {
-      display: inline-block;
-      background: #337ab7;
-      color: white;
-      padding: 0.6em 1.2em;
-      margin-top: 1em;
-      text-decoration: none;
-      border-radius: 8px;
+    p {
+      font-size: 1em;
+      color: #4d6f68;
     }
 
     .gallery {
-      padding: 2em;
+      padding: 2em 1em;
       background: #f8f8f8;
     }
 
     .gallery h2 {
       margin-bottom: 1em;
+      font-size: 1.5em;
+      color: #2a4d45;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1em;
-      max-width: 900px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5em;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     .gallery-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: white;
+      border-radius: 10px;
+      padding: 0.8em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
     }
 
     .gallery-item img {
       width: 100%;
       height: auto;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       cursor: pointer;
     }
 
     .caption {
       margin-top: 0.5em;
       font-size: 0.9em;
+      color: #444;
     }
 
-    /* Lightbox style */
     #lightbox {
       position: fixed;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       display: none;
       align-items: center;
       justify-content: center;
@@ -106,26 +100,20 @@
     }
 
     footer {
-      font-size: 0.8em;
-      margin: 3em 0 1em;
+      font-size: 0.9em;
+      padding: 2em 1em;
       color: #888;
+      background: #fafafa;
+      border-top: 1px solid #eee;
     }
   </style>
 </head>
 <body>
   <header>
+    <img src="images/logo.png" alt="Logo Les Aquarelles de Flo">
     <h1>Les Aquarelles de Flo</h1>
     <p>Cartes postales et créations à vélo</p>
   </header>
-
-  <!--<div class="product">
-    <img src="images/carte_rue.jpeg" alt="Carte postale rue de San Pedro">
-    <div class="product-description">
-      <h2>Carte postale – Rue de San Pedro</h2>
-      <p>Impression 5x7" sur papier photo</p>
-      <a href="https://buy.stripe.com/test_test_test" class="buy-button">Acheter – 6$</a>
-    </div>
-  </div>-->
 
   <section class="gallery">
     <h2>Galerie d'aquarelles</h2>
@@ -139,11 +127,11 @@
         <div class="caption">Lac Atitlán</div>
       </div>
       <div class="gallery-item">
-        <img src="images/carte_ramen.jpeg" alt="Marché Chichicastenango" onclick="openLightbox(this)">
+        <img src="images/carte_ramen.jpeg" alt="Restaurant Japonais" onclick="openLightbox(this)">
         <div class="caption">Restaurant Japonais</div>
       </div>
       <div class="gallery-item">
-        <img src="images/carte_rue.jpeg" alt="Marché Chichicastenango" onclick="openLightbox(this)">
+        <img src="images/carte_rue.jpeg" alt="Rue du marché de San Pedro" onclick="openLightbox(this)">
         <div class="caption">Rue du marché de San Pedro</div>
       </div>
       <!-- Ajoute plus d’éléments ici -->
@@ -155,7 +143,7 @@
   </div>
 
   <footer>
-    © 2025 Les Aquarelles de Flo
+    © 2025 Les Aquarelles de Flo – Tous droits réservés
   </footer>
 
   <script>
