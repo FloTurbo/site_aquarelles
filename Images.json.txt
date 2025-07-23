@@ -1,0 +1,22 @@
+[
+  {
+    "src": "images/carte_elementsDeVie.jpeg",
+    "alt": "Éléments de vie",
+    "caption": "Éléments de vie"
+  },
+  {
+    "src": "images/carte_lac.jpeg",
+    "alt": "Lac Atitlán",
+    "caption": "Lac Atitlán"
+  },
+  {
+    "src": "images/carte_ramen.jpeg",
+    "alt": "Restaurant Japonais",
+    "caption": "Restaurant Japonais"
+  },
+  {
+    "src": "images/carte_rue.jpeg",
+    "alt": "Rue du marché de San Pedro",
+    "caption": "Rue du marché de San Pedro"
+  }
+]
