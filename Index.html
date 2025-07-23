@@ -5,10 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Les Aquarelles de Flo</title>
   <style>
+    :root {
+      --bleu-fonce: #083b66;
+      --bleu-clair: #52c1ee;
+      --orange: #f27c2a;
+      --vert: #a5cd39;
+      --beige: #fdfaf5;
+    }
+
     body {
       font-family: 'Helvetica Neue', sans-serif;
-      background: #fffefc;
-      color: #333;
+      background: var(--beige);
+      color: var(--bleu-fonce);
       margin: 0;
       padding: 0;
       text-align: center;
@@ -16,36 +24,42 @@
 
     header {
       padding: 2em 1em;
-      background-color: #e9f3f1;
-      border-bottom: 2px solid #c4dedb;
+      background-color: var(--bleu-clair);
+      border-bottom: 4px solid var(--bleu-fonce);
     }
 
     header img {
-      width: 120px;
-      height: auto;
-      margin-bottom: 0.5em;
-    }
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  border: 4px solid var(--bleu-clair);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5em;
+}
+
 
     h1 {
       margin: 0.2em 0;
-      font-size: 2em;
-      color: #2a4d45;
+      font-size: 2.2em;
+      color: var(--bleu-fonce);
     }
 
     p {
       font-size: 1em;
-      color: #4d6f68;
+      color: var(--bleu-fonce);
     }
 
     .gallery {
       padding: 2em 1em;
-      background: #f8f8f8;
+      background: #ffffff;
     }
 
     .gallery h2 {
       margin-bottom: 1em;
-      font-size: 1.5em;
-      color: #2a4d45;
+      font-size: 1.6em;
+      color: var(--bleu-fonce);
     }
 
     .gallery-grid {
@@ -57,11 +71,12 @@
     }
 
     .gallery-item {
-      background: white;
+      background: var(--beige);
       border-radius: 10px;
       padding: 0.8em;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       transition: transform 0.2s;
+      border: 1px solid var(--bleu-clair);
     }
 
     .gallery-item:hover {
@@ -78,7 +93,7 @@
     .caption {
       margin-top: 0.5em;
       font-size: 0.9em;
-      color: #444;
+      color: var(--bleu-fonce);
     }
 
     #lightbox {
@@ -86,7 +101,7 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       display: none;
       align-items: center;
       justify-content: center;
@@ -97,14 +112,15 @@
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
 
     footer {
       font-size: 0.9em;
       padding: 2em 1em;
-      color: #888;
-      background: #fafafa;
-      border-top: 1px solid #eee;
+      color: var(--bleu-fonce);
+      background: var(--bleu-clair);
+      border-top: 4px solid var(--bleu-fonce);
     }
   </style>
 </head>
@@ -134,7 +150,6 @@
         <img src="images/carte_rue.jpeg" alt="Rue du marché de San Pedro" onclick="openLightbox(this)">
         <div class="caption">Rue du marché de San Pedro</div>
       </div>
-      <!-- Ajoute plus d’éléments ici -->
     </div>
   </section>
 
@@ -143,7 +158,7 @@
   </div>
 
   <footer>
-    © 2025 Les Aquarelles de Flo – Tous droits réservés
+    © 2025 Les Aquarelles de Flo – Go with the Flo 🎨🚲
   </footer>
 
   <script>
