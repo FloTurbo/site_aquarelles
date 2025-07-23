@@ -29,16 +29,15 @@
     }
 
     header img {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 50%;
-  background: white;
-  border: 4px solid var(--bleu-clair);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.5em;
-}
-
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: white;
+      border: 4px solid var(--bleu-clair);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.5em;
+    }
 
     h1 {
       margin: 0.2em 0;
@@ -133,23 +132,8 @@
 
   <section class="gallery">
     <h2>Galerie d'aquarelles</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="images/carte_elementsDeVie.jpeg" alt="Éléments de vie" onclick="openLightbox(this)">
-        <div class="caption">Éléments de vie</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/carte_lac.jpeg" alt="Lac Atitlán" onclick="openLightbox(this)">
-        <div class="caption">Lac Atitlán</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/carte_ramen.jpeg" alt="Restaurant Japonais" onclick="openLightbox(this)">
-        <div class="caption">Restaurant Japonais</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/carte_rue.jpeg" alt="Rue du marché de San Pedro" onclick="openLightbox(this)">
-        <div class="caption">Rue du marché de San Pedro</div>
-      </div>
+    <div class="gallery-grid" id="gallery-container">
+      <!-- Images insérées dynamiquement -->
     </div>
   </section>
 
@@ -162,12 +146,38 @@
   </footer>
 
   <script>
+    async function loadGallery() {
+      const response = await fetch('images.json');
+      const images = await response.json();
+      const container = document.getElementById('gallery-container');
+
+      images.forEach(image => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = image.alt;
+        img.onclick = () => openLightbox(img);
+
+        const caption = document.createElement('div');
+        caption.className = 'caption';
+        caption.textContent = image.caption;
+
+        item.appendChild(img);
+        item.appendChild(caption);
+        container.appendChild(item);
+      });
+    }
+
     function openLightbox(imgElement) {
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
       lightboxImg.src = imgElement.src;
       lightbox.style.display = "flex";
     }
+
+    loadGallery();
   </script>
 </body>
 </html>
