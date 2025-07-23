@@ -20,6 +20,13 @@ header {
   background-color: var(--bleu-clair);
   border-bottom: 4px solid var(--bleu-fonce);
 }
+container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2em 1em;
+  text-align: left;
+}
+
 
 header img {
   width: 130px;
