@@ -117,11 +117,25 @@ footer {
   background: var(--bleu-clair);
   border-top: 4px solid var(--bleu-fonce);
 }
+/* ... votre code CSS existant ... */
 
+/* Ajustement pour les pages 'À propos' et 'Contact' */
 .content {
+  padding: 2em; /* Garde le padding intérieur */
+  max-width: 1000px; /* **MODIFIE CELA** : Aligne avec le max-width du .gallery-grid */
+  margin: 0 auto; /* Centre le bloc de contenu */
+  text-align: left; /* Garde le texte aligné à gauche */
+  background: #ffffff; /* **AJOUTE CELA** : Donne un fond blanc comme la section galerie */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* **OPTIONNEL** : Pour un léger effet d'ombre, comme le gallery-item */
+  border-radius: 10px; /* **OPTIONNEL** : Pour des bords arrondis, comme le gallery-item */
+}
+
+/* ... le reste de votre code CSS ... */
+
+/* .content {
   padding: 2em;
   max-width: 800px;
   margin: 0 auto;
   text-align: left;
   background: #ffffff;
-}
+} */
