@@ -3,12 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Les Aquarelles de Flo</title>
+
+  <!-- Titre SEO -->
+  <title>Les Aquarelles de Flo – Galerie d’aquarelles originales à vélo</title>
+
+  <!-- Meta description -->
+  <meta name="description" content="Découvrez les aquarelles originales de Flo, inspirées de ses voyages à vélo. Cartes postales, paysages, et créations uniques peintes à la main.">
+
+  <!-- Meta keywords -->
+  <meta name="keywords" content="aquarelle, aquarelles, cartes postales, art à vélo, peinture, Les Aquarelles de Flo, paysages, illustration, aquarelle voyage">
+
+  <!-- Open Graph (partage réseaux sociaux) -->
+  <meta property="og:title" content="Les Aquarelles de Flo – Galerie d’aquarelles originales à vélo" />
+  <meta property="og:description" content="Découvrez les aquarelles uniques de Flo, créées au fil de ses voyages à vélo. Cartes postales et paysages inspirants." />
+  <meta property="og:image" content="https://aquarellesdeflo.netlify.app/logo.png" />
+  <meta property="og:url" content="https://aquarellesdeflo.netlify.app/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Les Aquarelles de Flo – Galerie d’aquarelles originales à vélo">
+  <meta name="twitter:description" content="Découvrez les aquarelles uniques de Flo, créées au fil de ses voyages à vélo.">
+  <meta name="twitter:image" content="https://aquarellesdeflo.netlify.app/logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Feuille de style -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Logo Les Aquarelles de Flo" />
+    <img src="logo.png" alt="Logo circulaire représentant Les Aquarelles de Flo, artiste voyageur à vélo" />
     <h1>Les Aquarelles de Flo</h1>
     <p>Cartes postales et créations à vélo</p>
     <nav>
@@ -18,19 +44,24 @@
     </nav>
   </header>
 
-  <div class="main-content-wrapper">
+  <main class="main-content-wrapper">
     <section class="gallery">
       <h2>Galerie d'aquarelles</h2>
+      <p>Explorez mes aquarelles peintes à la main, inspirées par mes aventures à vélo à travers le monde. Chaque œuvre est unique et disponible en carte postale.</p>
       <div class="gallery-grid" id="gallery">
-        </div>
+        <!-- Images insérées dynamiquement depuis script.js -->
+      </div>
     </section>
-  </div>
+  </main>
+
+  <!-- Lightbox -->
   <div id="lightbox" onclick="this.style.display='none'">
-    <img id="lightbox-img" src="" alt="">
+    <img id="lightbox-img" src="" alt="Agrandissement d'une aquarelle" loading="lazy">
   </div>
 
   <footer>
-    © 2025 Les Aquarelles de Flo – Go with the Flo 🎨🚲
+    <p>© 2025 Les Aquarelles de Flo – Go with the Flo 🎨🚲</p>
+    <p><a href="sitemap.xml">Plan du site</a></p>
   </footer>
 
   <script src="script.js"></script>
