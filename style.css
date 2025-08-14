@@ -1,0 +1,175 @@
+:root {
+  --bleu-fonce: #083b66;
+  --bleu-clair: #87CEFA;
+  --orange: #f27c2a;
+  --vert: #a5cd39;
+  --beige: #fdfaf5;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background: var(--beige);
+  color: var(--bleu-fonce);
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Centrage global du texte, peut être overridden localement */
+}
+
+/* Styles du HEADER */
+header {
+  padding: 2em 1em; /* Padding pour le header */
+  background-color: var(--bleu-clair);
+  border-bottom: 4px solid var(--bleu-fonce);
+}
+
+header img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  border: 4px solid var(--bleu-clair);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  margin: 0.2em 0;
+  font-size: 2.2em;
+  color: var(--bleu-fonce);
+}
+
+p {
+  font-size: 1em;
+  color: var(--bleu-fonce);
+}
+
+/* Styles de la NAVIGATION */
+nav {
+  margin-top: 1em; /* Espace au-dessus des liens de navigation */
+}
+
+nav a {
+  margin: 0 1em; /* Espacement horizontal entre les liens */
+  color: var(--bleu-fonce);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out; /* Effet de transition au survol */
+}
+
+nav a:hover,
+nav a:focus {
+  color: var(--orange); /* Changement de couleur au survol/focus */
+}
+
+
+/* --- NOUVELLE RÈGLE : Conteneur principal pour toutes les sections de contenu --- */
+/* C'est la clé de l'uniformisation de l'affichage sur mobile et desktop */
+.main-content-wrapper {
+  max-width: 1000px; /* Largeur maximale pour le contenu sur les grands écrans */
+  margin: 2em auto; /* Marge verticale et centrage automatique */
+  padding: 2em 1em; /* Padding interne : 2em vertical, 1em horizontal pour les mobiles */
+  background: #ffffff; /* Fond blanc pour toutes les sections de contenu */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Ombre légère pour un effet visuel */
+  border-radius: 10px; /* Bords arrondis pour la cohérence */
+  border-top: 1px solid var(--bleu-clair); /* Ajout d'une bordure supérieure pour l'esthétique, comme dans le header */
+}
+
+
+/* Styles de la GALERIE (ajustés pour utiliser .main-content-wrapper) */
+.gallery {
+  /* Ces propriétés sont maintenant gérées par .main-content-wrapper */
+  /* padding: 2em 1em; */
+  /* background: #ffffff; */
+}
+
+.gallery h2 {
+  margin-bottom: 1em;
+  font-size: 1.6em;
+  color: var(--bleu-fonce);
+  text-align: center; /* S'assurer que le titre de la galerie est centré */
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5em;
+  /* Ces propriétés sont maintenant gérées par .main-content-wrapper (via son parent) */
+  /* max-width: 1000px; */
+  /* margin: 0 auto; */
+}
+
+.gallery-item {
+  background: var(--beige);
+  border-radius: 10px;
+  padding: 0.8em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+  border: 1px solid var(--bleu-clair);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.caption {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: var(--bleu-fonce);
+}
+
+/* Styles des pages CONTENU (À propos, Contact - ajustés pour utiliser .main-content-wrapper) */
+.content {
+  /* Ces propriétés sont maintenant gérées par .main-content-wrapper */
+  /* padding: 2em; */
+  /* max-width: 800px; */
+  /* margin: 0 auto; */
+  /* background: #ffffff; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+  /* border-radius: 10px; */
+}
+
+/* Spécifique pour le texte dans .content, pour assurer l'alignement à gauche */
+.content h2,
+.content p {
+  text-align: left; /* Aligne le texte des titres et paragraphes à gauche */
+  /* Optionnel: un peu de padding horizontal pour les petits écrans si le texte colle trop aux bords */
+  padding: 0 1em;
+}
+
+/* Styles du LIGHTBOX */
+#lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none; /* Masqué par défaut */
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+/* Styles du FOOTER */
+footer {
+  font-size: 0.9em;
+  padding: 2em 1em;
+  color: var(--bleu-fonce);
+  background: var(--bleu-clair);
+  border-top: 4px solid var(--bleu-fonce);
+  margin-top: 2em; /* Espace au-dessus du footer */
+}

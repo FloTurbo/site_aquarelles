@@ -1,4 +1,8 @@
-[
+[{
+    "src": "images/golden_dowhill.jpeg",
+    "alt": "golden volcan",
+    "caption": "Golden downhill"
+  },
   {
     "src": "images/carte_elementsDeVie.jpeg",
     "alt": "Éléments de vie",
@@ -23,5 +27,15 @@
     "src": "images/carte_lune.jpeg",
     "alt": "Haiku à la Lune",
     "caption": "Haiku à la Lune"
+  },
+  {
+    "src": "images/dance_emotion.jpeg",
+    "alt": "dance emotion",
+    "caption": "Danse des émotions"
+  },
+  {
+    "src": "images/elfuego .jpeg",
+    "alt": "Volcan Guatemala ",
+    "caption": "Volcan el Fuego"
   }
 ]
