@@ -1,41 +1,42 @@
-[{
+[
+  {
     "src": "images/golden_dowhill.jpeg",
-    "alt": "golden volcan",
-    "caption": "Golden downhill"
+    "alt": "Aquarelle Golden Downhill – paysage de volcan doré",
+    "caption": "Golden Downhill – Aquarelle inspirée d’un volcan doré"
   },
   {
     "src": "images/carte_elementsDeVie.jpeg",
-    "alt": "Éléments de vie",
-    "caption": "Éléments de vie"
+    "alt": "Aquarelle Éléments de vie – symboles de la vie et de la nature",
+    "caption": "Éléments de vie – Aquarelle représentant les symboles de la vie"
   },
   {
     "src": "images/carte_lac.jpeg",
-    "alt": "Lac Atitlán",
-    "caption": "Lac Atitlán"
+    "alt": "Aquarelle Lac Atitlán – paysage du lac au Guatemala",
+    "caption": "Lac Atitlán – Aquarelle d’un paysage du lac au Guatemala"
   },
   {
     "src": "images/carte_ramen.jpeg",
-    "alt": "Restaurant Japonais",
-    "caption": "Restaurant Japonais"
+    "alt": "Aquarelle Restaurant Japonais – bol de ramen",
+    "caption": "Restaurant Japonais – Aquarelle d’un bol de ramen"
   },
   {
     "src": "images/carte_rue.jpeg",
-    "alt": "Rue du marché de San Pedro",
-    "caption": "Rue du marché de San Pedro"
+    "alt": "Aquarelle Rue du marché de San Pedro – ambiance de marché coloré",
+    "caption": "Rue du marché de San Pedro – Aquarelle d’une rue animée au Guatemala"
   },
   {
     "src": "images/carte_lune.jpeg",
-    "alt": "Haiku à la Lune",
-    "caption": "Haiku à la Lune"
+    "alt": "Aquarelle Haiku à la Lune – scène poétique nocturne",
+    "caption": "Haiku à la Lune – Aquarelle poétique représentant la lune"
   },
   {
     "src": "images/dance_emotion.jpeg",
-    "alt": "dance emotion",
-    "caption": "Danse des émotions"
+    "alt": "Aquarelle Danse des émotions – mouvement et couleurs",
+    "caption": "Danse des émotions – Aquarelle illustrant le mouvement et les émotions"
   },
   {
-    "src": "images/elfuego .jpeg",
-    "alt": "Volcan Guatemala ",
-    "caption": "Volcan el Fuego"
+    "src": "images/elfuego.jpeg",
+    "alt": "Aquarelle Volcan El Fuego au Guatemala",
+    "caption": "Volcan El Fuego – Aquarelle du volcan en activité au Guatemala"
   }
 ]
