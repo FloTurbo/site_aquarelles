@@ -144,6 +144,21 @@ nav a:focus {
   padding: 0 1em;
 }
 
+.cta {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #3b82f6; /* bleu doux */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.cta:hover {
+  background-color: #2563eb;
+}
+
+
 /* Styles du LIGHTBOX */
 #lightbox {
   position: fixed;
