@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commander des cartes postales – Les Aquarelles de Flo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo Les Aquarelles de Flo" />
+    <h1>Commander des cartes postales</h1>
+    <nav>
+      <a href="index.html">Galerie</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="commande.html">Commander</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Choisissez votre pack</h2>
+      <form name="commande" method="POST" data-netlify="true">
+        
+        <!-- Packs pré-sélectionnés -->
+        <label>
+          <input type="radio" name="pack" value="Pack 2 cartes" required>
+          Pack de 2 cartes
+        </label><br>
+        <label>
+          <input type="radio" name="pack" value="Pack 3 cartes">
+          Pack de 3 cartes
+        </label><br>
+        <label>
+          <input type="radio" name="pack" value="Pack 5 cartes">
+          Pack de 5 cartes
+        </label><br>
+        <label>
+          <input type="radio" name="pack" value="Personnalisé">
+          Sélection personnalisée (jusqu’à 5 cartes)
+        </label><br>
+
+        <!-- Sélection manuelle (cachée au départ) -->
+        <div id="custom-selection" style="display:none; margin-top: 1em;">
+          <p><strong>Si vous choisissez personnalisé, sélectionnez vos cartes :</strong></p>
+          
+          <select name="carte1">
+            <option value="">-- Choisir une carte --</option>
+            <option value="Golden Downhill">Golden Downhill</option>
+            <option value="Éléments de vie">Éléments de vie</option>
+            <option value="Lac Atitlán">Lac Atitlán</option>
+            <option value="Restaurant Japonais">Restaurant Japonais</option>
+            <option value="Rue du marché de San Pedro">Rue du marché de San Pedro</option>
+            <option value="Haiku à la Lune">Haiku à la Lune</option>
+            <option value="Danse des émotions">Danse des émotions</option>
+            <option value="Volcan El Fuego">Volcan El Fuego</option>
+          </select><br>
+
+          <select name="carte2"><option value="">-- Choisir une carte --</option></select><br>
+          <select name="carte3"><option value="">-- Choisir une carte --</option></select><br>
+          <select name="carte4"><option value="">-- Choisir une carte --</option></select><br>
+          <select name="carte5"><option value="">-- Choisir une carte --</option></select>
+        </div>
+
+        <hr>
+
+        <!-- Infos client -->
+        <h3>Vos informations</h3>
+        <label>Nom complet :<br>
+          <input type="text" name="nom" required>
+        </label><br>
+
+        <label>Email :<br>
+          <input type="email" name="email" required>
+        </label><br>
+
+        <label>Adresse de livraison :<br>
+          <textarea name="adresse" rows="4" required></textarea>
+        </label><br>
+
+        <label>Mode de paiement préféré :<br>
+          <select name="paiement" required>
+            <option value="Virement bancaire">Virement bancaire</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </label><br>
+
+        <!-- Bouton -->
+        <button type="submit">Envoyer la commande</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Les Aquarelles de Flo – Go with the Flo 🎨🚲
+  </footer>
+
+  <script>
+    // Script pour afficher/masquer la sélection personnalisée
+    const packRadios = document.querySelectorAll('input[name="pack"]');
+    const customSelection = document.getElementById("custom-selection");
+
+    // Remplir automatiquement les <select> de carte2 à carte5
+    const options = `
+      <option value="">-- Choisir une carte --</option>
+      <option value="Golden Downhill">Golden Downhill</option>
+      <option value="Éléments de vie">Éléments de vie</option>
+      <option value="Lac Atitlán">Lac Atitlán</option>
+      <option value="Restaurant Japonais">Restaurant Japonais</option>
+      <option value="Rue du marché de San Pedro">Rue du marché de San Pedro</option>
+      <option value="Haiku à la Lune">Haiku à la Lune</option>
+      <option value="Danse des émotions">Danse des émotions</option>
+      <option value="Volcan El Fuego">Volcan El Fuego</option>
+    `;
+
+    ["carte2","carte3","carte4","carte5"].forEach(name => {
+      const select = document.querySelector(`select[name="${name}"]`);
+      if(select) select.innerHTML = options;
+    });
+
+    packRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "Personnalisé") {
+          customSelection.style.display = "block";
+        } else {
+          customSelection.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
