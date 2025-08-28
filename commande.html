@@ -39,8 +39,11 @@
   </header>
 
   <div class="form-container">
-    <form name="commande" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="commande">
+<form action="https://formspree.io/f/TON_ID" method="POST">
+  <input type="text" name="nom" required>
+  <input type="email" name="email" required>
+  <textarea name="adresse"></textarea>
+  <button type="submit">Envoyer</button>
       <label for="pack">Choisir un pack :</label>
       <select id="pack" name="pack" onchange="updatePreview()">
         <option value="">-- Sélectionnez --</option>
