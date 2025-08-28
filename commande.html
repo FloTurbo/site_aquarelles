@@ -3,156 +3,282 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Commander des cartes - Les Aquarelles de Flo</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Commander des cartes postales – Les Aquarelles de Flo</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    .form-container {
-      max-width: 700px;
-      margin: 2em auto;
-      padding: 2em;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    form label { display: block; margin-top: 1em; font-weight: bold; }
-    form input, form select, form textarea {
-      width: 100%; padding: 0.6em; margin-top: 0.4em;
-      border: 1px solid #ccc; border-radius: 6px;
-    }
-    .preview {
-      display: flex; flex-wrap: wrap;
-      margin-top: 1em; gap: 10px;
-    }
-    .preview img {
-      width: 100px; height: auto;
-      border-radius: 6px; border: 1px solid #ddd;
-    }
-    .checkboxes {
-      display: flex; flex-wrap: wrap;
-      gap: 10px; margin-top: 1em;
-    }
+    /* Styles locaux (optionnels : tu peux aussi déplacer dans style.css) */
+    .wrap { max-width: 900px; margin: 2rem auto; padding: 1.5rem; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    h1, h2 { margin: .2em 0 .4em; }
+    form label { display:block; margin:.8rem 0 .3rem; font-weight:600; }
+    input, select, textarea { width:100%; padding:.65rem .8rem; border:1px solid #d0d7de; border-radius:8px; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+    .muted { color:#555; font-size:.95rem; margin:.3rem 0 1rem; }
+    .preview { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.6rem; }
+    .preview img { width:96px; height:auto; border-radius:8px; border:1px solid #e5e7eb; }
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:.6rem; }
+    .card-check { border:1px solid #e5e7eb; border-radius:10px; padding:.5rem; display:flex; gap:.6rem; align-items:center; background:#fafafa; }
+    .card-check img { width:64px; height:auto; border-radius:6px; border:1px solid #e5e7eb; }
+    .actions { margin-top:1.2rem; display:flex; gap:.8rem; align-items:center; }
+    .btn { background:#083b66; color:#fff; padding:.8rem 1.1rem; border:none; border-radius:8px; cursor:pointer; font-weight:700; }
+    .btn:disabled { opacity:.6; cursor:progress; }
+    .note { font-size:.9rem; color:#444; }
+    .success, .error { margin-top:1rem; padding:.8rem 1rem; border-radius:8px; }
+    .success { background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+    .error { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+    .hidden { display:none; }
+    nav a { margin-right:.8rem; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Commander vos cartes postales 🎨</h1>
+  <header class="wrap" style="background:#f8fafc;">
+    <img src="logo.png" alt="Logo Les Aquarelles de Flo" style="width:70px;height:70px;border-radius:50%;vertical-align:middle;">
+    <h1>Commander des cartes postales</h1>
+    <nav>
+      <a href="index.html">Galerie</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="commande.html"><strong>Commander</strong></a>
+    </nav>
   </header>
 
-  <div class="form-container">
-<form action="https://formspree.io/f/TON_ID" method="POST">
-  <input type="text" name="nom" required>
-  <input type="email" name="email" required>
-  <textarea name="adresse"></textarea>
-  <button type="submit">Envoyer</button>
-      <label for="pack">Choisir un pack :</label>
-      <select id="pack" name="pack" onchange="updatePreview()">
-        <option value="">-- Sélectionnez --</option>
+  <main class="wrap">
+    <p class="muted">Choisissez un pack pré-sélectionné (2, 3 ou 5 cartes) ou créez votre sélection personnalisée (jusqu’à 5). Les miniatures s’affichent automatiquement.</p>
+
+    <form id="orderForm" method="POST" action="YOUR_APPS_SCRIPT_WEB_APP_URL">
+      <!-- important : pour le fallback POST classique -->
+      <input type="hidden" name="form-name" value="commande">
+      <!-- on stockera la sélection finale pour le fallback -->
+      <input type="hidden" name="selectedCards" id="selectedCardsHidden">
+
+      <h2>Votre sélection</h2>
+      <label for="pack">Pack :</label>
+      <select id="pack" name="pack" required>
+        <option value="">-- Sélectionner --</option>
         <option value="pack2">Pack de 2 cartes</option>
         <option value="pack3">Pack de 3 cartes</option>
         <option value="pack5">Pack de 5 cartes</option>
         <option value="custom">Sélection personnalisée (jusqu’à 5)</option>
       </select>
 
-      <!-- Sélection personnalisée -->
-      <div id="custom-selection" style="display:none;">
-        <p>Choisissez vos cartes :</p>
-        <div class="checkboxes" id="custom-checkboxes"></div>
-      </div>
-
-      <!-- Aperçu -->
+      <!-- Aperçu dynamique -->
       <div class="preview" id="preview"></div>
 
-      <label>Nom complet :</label>
-      <input type="text" name="nom" required>
+      <!-- Sélection personnalisée (cachée tant que non choisie) -->
+      <div id="customBlock" class="hidden">
+        <p class="muted">Cochez jusqu’à 5 cartes :</p>
+        <div id="cardsGrid" class="cards-grid"></div>
+      </div>
 
-      <label>Adresse postale :</label>
-      <textarea name="adresse" rows="3" required></textarea>
+      <h2>Coordonnées</h2>
+      <div class="row">
+        <div>
+          <label>Nom complet</label>
+          <input type="text" name="nom" required>
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+      </div>
 
-      <label>Email :</label>
-      <input type="email" name="email" required>
+      <label>Adresse de livraison</label>
+      <textarea name="adresse" rows="3" required placeholder="Rue, ville, code postal, pays"></textarea>
 
-      <label>Mode de paiement (à convenir par email) :</label>
-      <select name="paiement">
-        <option value="virement">Virement bancaire</option>
-        <option value="paypal">PayPal</option>
-        <option value="autre">Autre</option>
-      </select>
+      <div class="row">
+        <div>
+          <label>Mode de paiement</label>
+          <select name="paiement" required>
+            <option value="Virement bancaire">Virement bancaire</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+        <div>
+          <label>Notes (optionnel)</label>
+          <input type="text" name="notes" placeholder="Message au vendeur...">
+        </div>
+      </div>
 
-      <button type="submit" style="margin-top:1.5em; padding:0.8em 1.5em; background:#083b66; color:white; border:none; border-radius:6px; cursor:pointer;">
-        Envoyer la commande
-      </button>
+      <div class="actions">
+        <button class="btn" type="submit" id="submitBtn">Envoyer la commande</button>
+        <span id="status" class="note"></span>
+      </div>
+
+      <div id="successBox" class="success hidden">Merci ! Votre commande a bien été envoyée. Vous recevrez un email de confirmation de ma part sous peu.</div>
+      <div id="errorBox" class="error hidden">Oups, l’envoi a échoué. Réessayez, ou votre navigateur va basculer en mode envoi classique.</div>
     </form>
-  </div>
+  </main>
+
+  <footer class="wrap" style="background:#f8fafc;">
+    © 2025 Les Aquarelles de Flo – Go with the Flo 🎨🚲
+  </footer>
 
   <script>
-    const packs = {
-      pack2: ["images/carte_lac.jpeg", "images/carte_lune.jpeg"],
-      pack3: ["images/golden_dowhill.jpeg", "images/carte_elementsDeVie.jpeg", "images/carte_ramen.jpeg"],
-      pack5: ["images/carte_lac.jpeg", "images/carte_lune.jpeg", "images/carte_ramen.jpeg", "images/carte_rue.jpeg", "images/dance_emotion.jpeg"]
+    // -------------- CONFIG --------------
+    const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL"; // <-- remplace par ton URL .../exec
+
+    // Packs (par titres d'œuvres — correspondent aux captions de images.json)
+    const packDefinitions = {
+      pack2: ["Lac Atitlán", "Haiku à la Lune"],
+      pack3: ["Golden Downhill", "Éléments de vie", "Restaurant Japonais"],
+      pack5: ["Lac Atitlán", "Haiku à la Lune", "Restaurant Japonais", "Rue du marché de San Pedro", "Danse des émotions"]
     };
 
-    const allCards = [
-      { src: "images/golden_dowhill.jpeg", caption: "Golden downhill" },
-      { src: "images/carte_elementsDeVie.jpeg", caption: "Éléments de vie" },
-      { src: "images/carte_lac.jpeg", caption: "Lac Atitlán" },
-      { src: "images/carte_ramen.jpeg", caption: "Restaurant Japonais" },
-      { src: "images/carte_rue.jpeg", caption: "Rue du marché de San Pedro" },
-      { src: "images/carte_lune.jpeg", caption: "Haiku à la Lune" },
-      { src: "images/dance_emotion.jpeg", caption: "Danse des émotions" },
-      { src: "images/elfuego.jpeg", caption: "Volcan el Fuego" }
-    ];
+    // On va charger images.json pour relier "caption" -> "src"
+    let allCards = [];          // [{caption, src, alt}]
+    let byCaption = {};         // caption -> {src, alt}
 
-    function updatePreview() {
-      const pack = document.getElementById("pack").value;
-      const preview = document.getElementById("preview");
-      const custom = document.getElementById("custom-selection");
-      preview.innerHTML = "";
+    const packSelect = document.getElementById("pack");
+    const preview = document.getElementById("preview");
+    const customBlock = document.getElementById("customBlock");
+    const cardsGrid = document.getElementById("cardsGrid");
+    const form = document.getElementById("orderForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusEl = document.getElementById("status");
+    const successBox = document.getElementById("successBox");
+    const errorBox = document.getElementById("errorBox");
+    const hiddenSelected = document.getElementById("selectedCardsHidden");
 
-      if (pack === "custom") {
-        custom.style.display = "block";
-        return;
-      } else {
-        custom.style.display = "none";
-      }
+    // Limite de sélection personnalisée
+    const CUSTOM_LIMIT = 5;
 
-      if (packs[pack]) {
-        packs[pack].forEach(src => {
-          const img = document.createElement("img");
-          img.src = src;
-          preview.appendChild(img);
+    // Charger les cartes depuis images.json
+    fetch("images.json")
+      .then(r => r.json())
+      .then(images => {
+        allCards = images.map(img => ({
+          caption: img.caption,
+          src: img.src,
+          alt: img.alt || (img.caption + " – Aquarelle de Flo")
+        }));
+        byCaption = Object.fromEntries(allCards.map(c => [c.caption, c]));
+        buildCustomGrid();
+      })
+      .catch(err => {
+        console.error("Impossible de charger images.json", err);
+      });
+
+    function buildCustomGrid() {
+      cardsGrid.innerHTML = "";
+      allCards.forEach(card => {
+        const div = document.createElement("label");
+        div.className = "card-check";
+        div.innerHTML = `
+          <input type="checkbox" name="customCard" value="${card.caption}">
+          <img src="${card.src}" alt="${card.alt}" loading="lazy">
+          <span>${card.caption}</span>
+        `;
+        // Gérer la limite de 5
+        const checkbox = div.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener("change", () => {
+          const checked = getCustomChecked();
+          if (checked.length > CUSTOM_LIMIT) {
+            checkbox.checked = false;
+            alert("Vous pouvez sélectionner au maximum " + CUSTOM_LIMIT + " cartes.");
+            return;
+          }
+          updatePreview();
         });
-      }
-    }
-
-    // Construire les cases à cocher pour le mode custom
-    const checkboxesDiv = document.getElementById("custom-checkboxes");
-    allCards.forEach(card => {
-      const label = document.createElement("label");
-      label.style.width = "120px";
-      label.innerHTML = `<input type="checkbox" name="customCards" value="${card.caption}" onchange="updateCustomPreview()"> ${card.caption}`;
-      checkboxesDiv.appendChild(label);
-    });
-
-    function updateCustomPreview() {
-      const checked = document.querySelectorAll('input[name="customCards"]:checked');
-      const preview = document.getElementById("preview");
-      preview.innerHTML = "";
-
-      if (checked.length > 5) {
-        alert("Vous pouvez sélectionner au maximum 5 cartes !");
-        checked[checked.length - 1].checked = false;
-        return;
-      }
-
-      checked.forEach(box => {
-        const card = allCards.find(c => c.caption === box.value);
-        if (card) {
-          const img = document.createElement("img");
-          img.src = card.src;
-          preview.appendChild(img);
-        }
+        cardsGrid.appendChild(div);
       });
     }
+
+    function getCustomChecked() {
+      return Array.from(document.querySelectorAll('input[name="customCard"]:checked'))
+                  .map(el => el.value);
+    }
+
+    packSelect.addEventListener("change", updatePreview);
+
+    function updatePreview() {
+      preview.innerHTML = "";
+      successBox.classList.add("hidden");
+      errorBox.classList.add("hidden");
+
+      if (packSelect.value === "custom") {
+        customBlock.classList.remove("hidden");
+        // Afficher les miniatures cochées
+        getCustomChecked().forEach(caption => {
+          const card = byCaption[caption];
+          if (card) addThumb(card.src, card.alt);
+        });
+      } else {
+        customBlock.classList.add("hidden");
+        const names = packDefinitions[packSelect.value] || [];
+        names.forEach(caption => {
+          const card = byCaption[caption];
+          if (card) addThumb(card.src, card.alt);
+        });
+      }
+      // Met à jour le champ caché pour le fallback
+      hiddenSelected.value = JSON.stringify(getCurrentSelection());
+    }
+
+    function addThumb(src, alt) {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = alt;
+      img.loading = "lazy";
+      preview.appendChild(img);
+    }
+
+    function getCurrentSelection() {
+      if (packSelect.value === "custom") {
+        return getCustomChecked();
+      }
+      const names = packDefinitions[packSelect.value] || [];
+      return names;
+    }
+
+    // Soumission AJAX vers Google Apps Script (avec fallback en POST classique)
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "Envoi en cours…";
+      submitBtn.disabled = true;
+      successBox.classList.add("hidden");
+      errorBox.classList.add("hidden");
+
+      const fd = new FormData(form);
+      const payload = Object.fromEntries(fd.entries());
+      payload.selectedCards = getCurrentSelection();
+      payload.pack = packSelect.value;
+      payload.userAgent = navigator.userAgent;
+
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        // Beaucoup d'Apps Script renvoient bien du JSON ; on tente de lire, sinon on continue.
+        let ok = res.ok;
+        try {
+          const data = await res.json();
+          ok = ok && (data.ok === true || data.result === "success");
+        } catch(_) {}
+
+        if (ok) {
+          statusEl.textContent = "";
+          successBox.classList.remove("hidden");
+          form.reset();
+          preview.innerHTML = "";
+          customBlock.classList.add("hidden");
+        } else {
+          throw new Error("Réponse inattendue du serveur");
+        }
+      } catch (err) {
+        // Fallback : soumission classique vers l'action (ouvre la page Apps Script)
+        console.warn("AJAX échoué, fallback POST classique :", err);
+        statusEl.textContent = "Échec AJAX, bascule en envoi classique…";
+        hiddenSelected.value = JSON.stringify(getCurrentSelection());
+        submitBtn.disabled = false;
+        form.submit();
+        return;
+      }
+
+      submitBtn.disabled = false;
+    });
   </script>
 </body>
 </html>
