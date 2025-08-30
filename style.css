@@ -158,6 +158,30 @@ nav a:focus {
   background-color: #2563eb;
 }
 
+.btn {
+  background: linear-gradient(135deg, #083b66, #1c6aa3); /* dégradé bleu profond */
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #1c6aa3, #083b66); /* inversion légère du dégradé */
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 
 /* Styles du LIGHTBOX */
 #lightbox {
