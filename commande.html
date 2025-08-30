@@ -68,8 +68,12 @@
     </div>
 
 
+       <div class="row">
+    <div style="grid-column: 1 / -1;">
       <label>Adresse de livraison</label>
       <textarea name="adresse" rows="3" required placeholder="Rue, ville, code postal, pays"></textarea>
+    </div>
+  </div>
 
       <div class="row">
         <div>
@@ -80,11 +84,13 @@
             <option value="Autre">Autre</option>
           </select>
         </div>
-        <div>
-          <label>Notes (optionnel)</label>
-          <input type="text" name="notes" placeholder="Message au vendeur...">
-        </div>
+       <div class="row">
+      <div style="grid-column: 1 / -1;">
+      <label>Notes (optionnel)</label>
+      <input type="text" name="notes" placeholder="Message au vendeur...">
       </div>
+    </div>
+
 
       <div class="actions">
         <button class="btn" type="submit">Envoyer la commande</button>
@@ -194,6 +200,22 @@
     }
 
     packSelect.addEventListener("change", updatePreview);
+
+    let lastSubmit = 0; // timestamp de la dernière soumission
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      
+      const now = Date.now();
+      if (now - lastSubmit < 3000) {  // moins de 3 secondes depuis le dernier submit
+        alert("Veuillez attendre 3 secondes avant de soumettre à nouveau.");
+        return;
+      }
+      lastSubmit = now;
+    
+      hiddenSelected.value = JSON.stringify(getCurrentSelection()); // s'assurer que les cartes sont envoyées
+      form.submit(); // soumission via iframe
+    });
 
     // Redirection après soumission réussie
     const iframe = document.querySelector('iframe[name="hidden_iframe"]');
