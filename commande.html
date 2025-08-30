@@ -45,7 +45,7 @@
         <option value="volcan">Pack Volcan – Soutien de feu (20$)</option>
         <option value="lac">Pack du Lac – Soutien du cœur (30$)</option>
         <option value="super">Super Pack – Soutien Total (50$)</option>
-        <option value="custom">Sélection du cœur (jusqu’à 5 cartes)</option>
+        <option value="custom">Sélection du cœur (jusqu’à 5 cartes) (donation)</option>
       </select>
 
       <div class="preview" id="preview"></div>
@@ -57,11 +57,11 @@
 
       <h2>Coordonnées</h2>
       <div class="row">
-        <div style="width:70%;">
+        <div style="width:90%;">
           <label>Nom complet</label>
            <input type="text" name="nom" required>
         </div>
-        <div style="width:70%;">
+        <div style="width:90%;">
          <label>Email</label>
          <input type="email" name="email" required>
       </div>
@@ -69,7 +69,7 @@
 
 
        <div class="row">
-    <div style="width:100%;">
+    <div style="width:190%;">
       <label>Adresse de livraison</label>
       <textarea name="adresse" rows="3" required placeholder="Rue, ville, code postal, pays"></textarea>
     </div>
@@ -79,13 +79,15 @@
         <div>
           <label>Mode de paiement</label>
           <select name="paiement" required>
-            <option value="Virement bancaire">Virement bancaire</option>
+            <option value="Interact Desjardins">Interact Desjardins</option>
+            <option value="Revolut">Revolut</option>
             <option value="PayPal">PayPal</option>
             <option value="Autre">Autre</option>
+            
           </select>
         </div>
        <div class="row">
-      <div style="width:100%;">
+      <div style="width:180%;">
       <label>Notes (optionnel)</label>
       <input type="text" name="notes" placeholder="Message au vendeur...">
       </div>
