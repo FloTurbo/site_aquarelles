@@ -69,7 +69,7 @@
 
 
        <div class="row">
-    <div style="width:80%;">
+    <div style="width:100%;">
       <label>Adresse de livraison</label>
       <textarea name="adresse" rows="3" required placeholder="Rue, ville, code postal, pays"></textarea>
     </div>
@@ -85,7 +85,7 @@
           </select>
         </div>
        <div class="row">
-      <div style="width:80%;">
+      <div style="width:100%;">
       <label>Notes (optionnel)</label>
       <input type="text" name="notes" placeholder="Message au vendeur...">
       </div>
@@ -111,6 +111,8 @@
   </footer>
 
   <script>
+
+    
     const packDefinitions = {
       volcan: ["Golden Downhill", "Volcan El Fuego"],
       lac: ["Restaurant Japonais", "Éléments de vie - Au lac Atitlan", "Rue du marché de San Pedro"],
@@ -125,6 +127,8 @@
     const cardsGrid = document.getElementById("cardsGrid");
     const hiddenSelected = document.getElementById("selectedCardsHidden");
     const CUSTOM_LIMIT = 5;
+
+    const form = document.getElementById("orderForm");
 
     // Charger les cartes
     fetch("images.json")
@@ -204,17 +208,26 @@
     let lastSubmit = 0; // timestamp de la dernière soumission
 
     form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      
-      const now = Date.now();
-      if (now - lastSubmit < 3000) {  // moins de 3 secondes depuis le dernier submit
-        alert("Veuillez attendre 3 secondes avant de soumettre à nouveau.");
-        return;
-      }
-      lastSubmit = now;
-    
-      hiddenSelected.value = JSON.stringify(getCurrentSelection()); // s'assurer que les cartes sont envoyées
-      form.submit(); // soumission via iframe
+    e.preventDefault();
+  
+    const now = Date.now();
+    if (now - lastSubmit < 3000) {
+      alert("⏳ Veuillez attendre 3 secondes avant de soumettre à nouveau.");
+      return;
+    }
+    lastSubmit = now;
+  
+    hiddenSelected.value = JSON.stringify(getCurrentSelection());
+  
+    // Désactiver le bouton
+    const submitButton = form.querySelector("button[type=submit]");
+    submitButton.disabled = true;
+  
+    setTimeout(() => {
+      submitButton.disabled = false;
+    }, 3000);
+  
+    form.submit(); // soumission dans l’iframe caché
     });
 
     // Redirection après soumission réussie
