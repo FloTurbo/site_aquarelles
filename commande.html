@@ -35,4 +35,175 @@
     <p class="muted">Choisissez un pack (pré-sélectionné ou personnalisé). Les miniatures des cartes s’affichent automatiquement.</p>
 
     <!-- Formulaire avec action directe vers Apps Script -->
-    <form id="orderForm" method="POST" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" target
+    <form id="orderForm" method="POST" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" target="hidden_iframe">
+      <input type="hidden" name="selectedCards" id="selectedCardsHidden">
+
+      <h2>Votre sélection</h2>
+      <label for="pack">Pack :</label>
+      <select id="pack" name="pack" required>
+        <option value="">-- Sélectionner --</option>
+        <option value="volcan">Pack Volcan – Soutien de feu (20$)</option>
+        <option value="lac">Pack du Lac – Soutien du cœur (30$)</option>
+        <option value="super">Super Pack – Soutien Total (50$)</option>
+        <option value="custom">Sélection du cœur (jusqu’à 5 cartes)</option>
+      </select>
+
+      <div class="preview" id="preview"></div>
+
+      <div id="customBlock" class="hidden">
+        <p class="muted">Cochez jusqu’à 5 cartes :</p>
+        <div id="cardsGrid"></div>
+      </div>
+
+      <h2>Coordonnées</h2>
+      <div class="row">
+        <div>
+          <label>Nom complet</label>
+          <input type="text" name="nom" required>
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+      </div>
+
+      <label>Adresse de livraison</label>
+      <textarea name="adresse" rows="3" required placeholder="Rue, ville, code postal, pays"></textarea>
+
+      <div class="row">
+        <div>
+          <label>Mode de paiement</label>
+          <select name="paiement" required>
+            <option value="Virement bancaire">Virement bancaire</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+        <div>
+          <label>Notes (optionnel)</label>
+          <input type="text" name="notes" placeholder="Message au vendeur...">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="submit">Envoyer la commande</button>
+      </div>
+
+      <div id="successBox" class="success hidden">
+        ✅ Merci ! Votre commande a bien été envoyée.  
+        Vous serez redirigé vers la galerie dans quelques secondes…
+      </div>
+    </form>
+
+    <!-- iframe caché pour soumission sans rechargement -->
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </main>
+
+  <footer class="wrap" style="background:#f8fafc;">
+    © 2025 Les Aquarelles de Flo – Go with the Flo 🎨🚲
+  </footer>
+
+  <script>
+    const packDefinitions = {
+      volcan: ["Golden Downhill", "El Fuego"],
+      lac: ["Restaurant Japonais", "Éléments de vie", "Rue du marché"],
+      super: ["Golden Downhill", "El Fuego", "Restaurant Japonais", "Éléments de vie", "Rue du marché"]
+    };
+
+    let allCards = [];
+    let byCaption = {};
+    const packSelect = document.getElementById("pack");
+    const preview = document.getElementById("preview");
+    const customBlock = document.getElementById("customBlock");
+    const cardsGrid = document.getElementById("cardsGrid");
+    const hiddenSelected = document.getElementById("selectedCardsHidden");
+    const CUSTOM_LIMIT = 5;
+
+    // Charger les cartes
+    fetch("images.json")
+      .then(r => r.json())
+      .then(images => {
+        allCards = images.map(img => ({
+          caption: img.caption,
+          src: img.src,
+          alt: img.alt || img.caption
+        }));
+        byCaption = Object.fromEntries(allCards.map(c => [c.caption, c]));
+        buildCustomGrid();
+      });
+
+    function buildCustomGrid() {
+      cardsGrid.innerHTML = "";
+      allCards.forEach(card => {
+        const div = document.createElement("label");
+        div.style.display = "block";
+        div.innerHTML = `
+          <input type="checkbox" name="customCard" value="${card.caption}">
+          <img src="${card.src}" alt="${card.alt}" style="width:70px;height:auto;vertical-align:middle;margin:0 8px;">
+          ${card.caption}
+        `;
+        const checkbox = div.querySelector("input");
+        checkbox.addEventListener("change", () => {
+          const checked = getCustomChecked();
+          if (checked.length > CUSTOM_LIMIT) {
+            checkbox.checked = false;
+            alert("Maximum " + CUSTOM_LIMIT + " cartes.");
+            return;
+          }
+          updatePreview();
+        });
+        cardsGrid.appendChild(div);
+      });
+    }
+
+    function getCustomChecked() {
+      return Array.from(document.querySelectorAll('input[name="customCard"]:checked'))
+                  .map(el => el.value);
+    }
+
+    function updatePreview() {
+      preview.innerHTML = "";
+      if (packSelect.value === "custom") {
+        customBlock.classList.remove("hidden");
+        getCustomChecked().forEach(caption => {
+          const card = byCaption[caption];
+          if (card) addThumb(card.src, card.alt);
+        });
+      } else {
+        customBlock.classList.add("hidden");
+        const names = packDefinitions[packSelect.value] || [];
+        names.forEach(caption => {
+          const card = byCaption[caption];
+          if (card) addThumb(card.src, card.alt);
+        });
+      }
+      hiddenSelected.value = JSON.stringify(getCurrentSelection());
+    }
+
+    function addThumb(src, alt) {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = alt;
+      preview.appendChild(img);
+    }
+
+    function getCurrentSelection() {
+      if (packSelect.value === "custom") return getCustomChecked();
+      return packDefinitions[packSelect.value] || [];
+    }
+
+    packSelect.addEventListener("change", updatePreview);
+
+    // Redirection après soumission réussie
+    const iframe = document.querySelector('iframe[name="hidden_iframe"]');
+    iframe.addEventListener('load', () => {
+      const form = document.getElementById('orderForm');
+      document.getElementById('successBox').classList.remove('hidden');
+      setTimeout(() => { window.location.href = "index.html"; }, 3000);
+      form.reset();
+      preview.innerHTML = "";
+      customBlock.classList.add("hidden");
+    });
+  </script>
+</body>
+</html>
