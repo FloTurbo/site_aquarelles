@@ -186,7 +186,7 @@ nav a:focus {
 /* ====== Menus déroulants ====== */
 select {
   background: linear-gradient(135deg, #083b66, #1c6aa3);
-  color: #fff;
+  color: #000000;
   padding: 0.65rem 0.8rem;
   border: none;
   border-radius: 12px;
@@ -221,7 +221,7 @@ textarea, input[type="text"], input[type="email"] {
   font-size: 1rem;
   resize: vertical;
   background: #f8f9fa;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+  /*box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);*/
   transition: box-shadow 0.2s ease, border 0.2s ease;
 }
 
