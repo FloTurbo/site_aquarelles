@@ -147,7 +147,8 @@
         }));
         byCaption = Object.fromEntries(allCards.map(c => [c.caption, c]));
         buildCustomGrid();
-      });
+      })
+      .catch(err => console.error("Erreur lors du chargement des cartes:", err));  // Catch error
 
     function buildCustomGrid() {
       cardsGrid.innerHTML = "";
@@ -226,6 +227,8 @@
       payload.selectedCards = getCurrentSelection();
       payload.pack = packSelect.value;
 
+      console.log("Données envoyées:", payload);  // Debugging
+
       try {
         const res = await fetch(APPS_SCRIPT_URL, {
           method: "POST",
@@ -239,8 +242,11 @@
           preview.innerHTML = "";
           customBlock.classList.add("hidden");
           setTimeout(() => { window.location.href = "index.html"; }, 3000);
-        } else throw new Error("Erreur serveur");
+        } else {
+          throw new Error("Erreur serveur");
+        }
       } catch (err) {
+        console.error("Erreur lors de l'envoi:", err);  // Debugging
         errorBox.classList.remove("hidden");
       }
 
