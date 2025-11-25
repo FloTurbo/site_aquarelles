@@ -15,8 +15,18 @@
     "caption": "Emporium Plaza"
   },
   {
+    "src": "images/Velo_rue.jpeg",
+    "alt": "vélo dans la hippie hwy à San Marcos la laguna",
+    "caption": "Vélo et cocos dans la rue"
+  },
+  {
+    "src": "images/Panteon_xoxo.jpeg",
+    "alt": "cimetière de Xoxo - dia de los muertos, Mexico",
+    "caption": "Panteón de Xoxo"
+  },
+  {
     "src": "images/mexico_life.jpeg",
-    "alt": "élémeent de vie au mexique – escalda, amis, chants, musique, danse et nourriture",
+    "alt": "élément de vie au mexique – escalade, amis, chants, musique, danse et nourriture",
     "caption": "Chiapas en indépendance"
   },
   {
